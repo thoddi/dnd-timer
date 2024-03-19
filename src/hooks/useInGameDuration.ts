@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import Sequence from "../storeService/Sequence";
-import { Duration } from "../storeService/StoreService.type";
+export interface Duration {
+  id: number;
+  name: string;
+  duration: number;
+}
 
 function useInGameDuration(): [Duration[], (name: string, duration: number) => void] {
   const key = 'timeSkip';
@@ -24,12 +28,6 @@ function useInGameDuration(): [Duration[], (name: string, duration: number) => v
 
   useEffect(() => {
     setList(get());
-    // const listener = window.addEventListener('storage', (event) => {
-    //   if (event.key === key) {
-    //     setList(get());
-    //   }
-    // });
-    // return listener;
   }, []);
 
   return [list, add];

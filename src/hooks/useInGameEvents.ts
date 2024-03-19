@@ -28,12 +28,6 @@ function useInGameEvents(): [InGameEvent[], (name: string) => void] {
 
   useEffect(() => {
     setList(get());
-    // const listener = window.addEventListener('storage', (event) => {
-    //   if (event.key === key) {
-    //     setList(get());
-    //   }
-    // });
-    // return listener;
   }, []);
 
   return [list, add];

@@ -1,22 +1,17 @@
 import { useEffect, useState } from "react";
-import useInGameDuration from "./useInGameDuration";
-import StoreService from "../StoreService/StoreService";
+
+const key = 'time';
 
 function useInGameTime(): [number, (speed: number) => void, (duration: number) => void] {
-  const [time, setTime] = useState(0);
+  const [time, setTime] = useState(() => Number(localStorage.getItem(key)));
   const [inGamePlaySpeed, setInGamePlaySpeed] = useState(0);
-
-  const [durationList] = useInGameDuration();
 
   const setPlaySpeed = (speed: number) => {
     setInGamePlaySpeed(speed);
   }
 
-  const addTime = (durationId: number) => {
-    const duration = durationList.find((d) => d.id = durationId);
-    if (duration) {
-      setTime(time + duration.duration);
-    }
+  const addTime = (seconds: number) => {
+    setTime(time + seconds);
   }
 
   useEffect(() => {
@@ -24,16 +19,12 @@ function useInGameTime(): [number, (speed: number) => void, (duration: number) =
     if (inGamePlaySpeed) {
       intervalId = setInterval(() => setTime((it) => {
         const newTime = it + 1;
-        StoreService.setTime(newTime);
+        localStorage.setItem(key, newTime.toString());
         return newTime;
       }), 1000 / inGamePlaySpeed);
     }
     return () => clearInterval(intervalId);
   }, [inGamePlaySpeed])
-
-  useEffect(() => {
-    setTime(StoreService.getTime());
-  }, []);
 
   return [time, setPlaySpeed, addTime];
 }

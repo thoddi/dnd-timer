@@ -30,12 +30,6 @@ function useInGameSpeed(): [Speed[], (name: string, speed: number) => void] {
 
   useEffect(() => {
     setList(get());
-    // const listener = window.addEventListener('storage', (event) => {
-    //   if (event.key === key) {
-    //     setList(get());
-    //   }
-    // });
-    // return listener;
   }, []);
 
   return [list, add];
