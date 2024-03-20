@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/dnd-timer/static/css/main.282923ed.css",
+    "main.js": "/dnd-timer/static/js/main.617511e0.js",
+    "static/js/453.40837cfc.chunk.js": "/dnd-timer/static/js/453.40837cfc.chunk.js",
+    "index.html": "/dnd-timer/index.html",
+    "main.282923ed.css.map": "/dnd-timer/static/css/main.282923ed.css.map",
+    "main.617511e0.js.map": "/dnd-timer/static/js/main.617511e0.js.map",
+    "453.40837cfc.chunk.js.map": "/dnd-timer/static/js/453.40837cfc.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.282923ed.css",
+    "static/js/main.617511e0.js"
+  ]
+}
