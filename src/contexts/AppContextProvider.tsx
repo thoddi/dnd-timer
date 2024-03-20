@@ -1,6 +1,7 @@
 import React, { createContext } from "react";
 import useInGameTime from "../hooks/useInGameTime";
-import useInGameLogs, { Log } from "../hooks/useInGameLogs";
+import useLocalStorageList, { Create } from "../hooks/useLocalStorageList";
+import { Log, Timer } from "./AppContext.type";
 
 interface TimeContextType {
   time: number;
@@ -10,23 +11,32 @@ interface TimeContextType {
 
 interface LogContextType {
   logs: Log[];
-  addLog(text: string, inGameTime: number, durationId?: number, eventId?: number): void;
+  addLog(item: Create<Log>): void;
+}
+
+interface TimerContextType {
+  timers: Timer[];
+  addTimer(item: Create<Timer>): void;
 }
 
 export const TimeContext = createContext<TimeContextType>({} as TimeContextType);
 export const LogContext = createContext<LogContextType>({} as LogContextType);
+export const TimerContext = createContext<TimerContextType>({} as TimerContextType);
 
 interface Props {
   children: React.ReactNode;
 }
 function AppContextProvider({ children }: Props) {
   const [time, setPlaySpeed, addTime] = useInGameTime();
-  const [logs, addLog] = useInGameLogs();
+  const [logs, addLog] = useLocalStorageList<Log>('logs');
+  const [timers, addTimer] = useLocalStorageList<Timer>('timer');
 
   return (
     <TimeContext.Provider value={{ time, setPlaySpeed, addTime }}>
       <LogContext.Provider value={{ logs, addLog }}>
-        {children}
+        <TimerContext.Provider value={{ timers, addTimer }}>
+          {children}
+        </TimerContext.Provider>
       </LogContext.Provider>
     </TimeContext.Provider>
   );

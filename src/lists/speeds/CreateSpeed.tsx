@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { Speed } from "../../contexts/AppContext.type";
+import { Create } from "../../hooks/useLocalStorageList";
 
 interface Props {
-  onAdd: (name: string, speed: number) => void;
+  onAdd: (item: Create<Speed>) => void;
 }
 
 function CreateSpeed({ onAdd }: Props) {
@@ -9,7 +11,7 @@ function CreateSpeed({ onAdd }: Props) {
   const [speed, setSpeed] = useState(1);
 
   const onSave = () => {
-    onAdd(name, speed);
+    onAdd({ name, speed });
     setName('');
     setSpeed(1);
   };

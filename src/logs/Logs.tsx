@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import Modal from "../Modal";
-import CreateLog from "../CreateLog";
+import CreateLog from "./CreateLog";
 import { LogContext, TimeContext } from "../contexts/AppContextProvider";
 
 function Logs() {
@@ -10,7 +10,7 @@ function Logs() {
   const { time } = useContext(TimeContext);
 
   const onAdd = (text: string) => {
-    addLog(text, time);
+    addLog({ text, inGameTime: time });
   };
 
   return (

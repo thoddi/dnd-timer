@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { Create } from "../../hooks/useLocalStorageList";
+import { Duration } from "../../contexts/AppContext.type";
 
 interface Props {
-  onAdd: (name: string, duration: number) => void;
+  onAdd: (item: Create<Duration>) => void;
 }
 
 function CreateDuration({ onAdd }: Props) {
@@ -10,7 +12,7 @@ function CreateDuration({ onAdd }: Props) {
   const [duration, setDuration] = useState(defaultDuration); // 1 hour
 
   const onSave = () => {
-    onAdd(name, duration);
+    onAdd({ name, duration });
     setName('');
     setDuration(defaultDuration);
   };

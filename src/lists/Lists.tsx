@@ -1,6 +1,6 @@
-import DurationList from "./DurationList";
-import EventList from "./EventList";
-import SpeedList from "./SpeedList";
+import DurationList from "./durations/DurationList";
+import EventList from "./events/EventList";
+import SpeedList from "./speeds/SpeedList";
 
 function Lists() {
   return (
