@@ -33,7 +33,7 @@ function AppContextProvider({ children }: Props) {
 
   return (
     <TimeContext.Provider value={{ time, setPlaySpeed, addTime }}>
-      <LogContext.Provider value={{ logs, addLog }}>
+      <LogContext.Provider value={{ logs:[...logs].reverse(), addLog }}>
         <TimerContext.Provider value={{ timers, addTimer }}>
           {children}
         </TimerContext.Provider>

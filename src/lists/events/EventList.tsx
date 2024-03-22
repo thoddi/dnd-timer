@@ -4,10 +4,11 @@ import CreateEvent from "./CreateEvent";
 import { LogContext, TimeContext, TimerContext } from "../../contexts/AppContextProvider";
 import useLocalStorageList from "../../hooks/useLocalStorageList";
 import { InGameEvent } from "../../contexts/AppContext.type";
+import CreateTimer from "../../timers/CreateTimer";
 
 function EventList() {
   const [isCreatingEvent, setIsCreatingEvent] = useState(false);
-  const [isCreatingTimer, setIsCreatingTimer] = useState(false);
+  const [isCreatingTimerforEvent, setIsCreatingTimer] = useState<number>();
 
   const [events, addEvent] = useLocalStorageList<InGameEvent>('event');
   const { addLog } = useContext(LogContext);
@@ -22,7 +23,7 @@ function EventList() {
           <div key={event.id} style={{ display: 'flex', margin: 5, padding: 5, border: '1px solid grey', borderRadius: 5 }}>
             {event.name}
             <button style={{ marginLeft: 'auto' }} onClick={() => addLog({ text: event.name, inGameTime: time, eventId: event.id })}>Kveikja</button>
-            <button>Mæla</button>
+            <button onClick={() => setIsCreatingTimer(event.id)}>Mæla</button>
           </div>
         ))}
       </div>
@@ -31,9 +32,9 @@ function EventList() {
           <CreateEvent onAdd={addEvent}></CreateEvent>
         </Modal>
       )}
-      {isCreatingTimer && (
-        <Modal onClose={() => setIsCreatingTimer(false)}>
-          <CreateEvent onAdd={addEvent}></CreateEvent>
+      {isCreatingTimerforEvent && (
+        <Modal onClose={() => setIsCreatingTimer(undefined)}>
+          <CreateTimer eventId={isCreatingTimerforEvent} onAdd={addTimer}></CreateTimer>
         </Modal>
       )}
     </div>

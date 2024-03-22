@@ -18,7 +18,14 @@ function Logs() {
       <h2>Atburðir</h2>
       <button onClick={() => setIsCreating(true)}>Skrá nýjan atburð</button>
       {logs.map((log) => (
-        <div key={log.id} style={{ margin: 5, padding: 5, borderTop: '1px solid grey' }}>{log.text}</div>
+        <div key={log.id} style={{ display: 'flex', margin: 5, padding: 5, borderTop: '1px solid grey' }}>
+          <div>
+            {log.text}
+          </div>
+          <div>
+            
+          </div>
+        </div>
       ))}
       {isCreating && (
         <Modal onClose={() => setIsCreating(false)}>

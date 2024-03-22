@@ -16,3 +16,10 @@
 .lists {
   flex: 1;
 }
+
+progress.complete::-moz-progress-bar {
+  background: red; 
+}
+progress.complete::-webkit-progress-value {
+  background: red;
+}
