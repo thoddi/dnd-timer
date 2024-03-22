@@ -1,26 +1,33 @@
 import { useCallback, useContext } from "react";
-import { Timer as TimerType } from "../contexts/AppContext.type";
-import { LogContext, TimeContext } from "../contexts/AppContextProvider";
+import { LogContext, TimeContext, TimerContext } from "../contexts/AppContextProvider";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
-  timer: TimerType;
+  id: number;
+  durationId?: number;
+  eventId?: number;
+  logId?: number;
+  name: string;
+  finishAtInGameTime?: number;
 }
 
-function Timer({ timer }: Props) {
+function TimerItem({ id, durationId, eventId, logId, name, finishAtInGameTime }: Props) {
   const { time } = useContext(TimeContext);
-  const { logs } = useContext(LogContext);
+  const { list: logs } = useContext(LogContext);
+  const { remove } = useContext(TimerContext);
 
   const getStartTime = useCallback(() => {
-    if (timer.durationId) {
-      return logs.find((log) => log.durationId === timer.durationId)?.inGameTime ?? 0;
-    } else if (timer.eventId) {
-      return logs.find((log) => log.eventId === timer.eventId)?.inGameTime ?? 0;
-    } else if (timer.logId) {
+    if (durationId) {
+      return logs.find((log) => log.durationId === durationId)?.inGameTime ?? 0;
+    } else if (eventId) {
+      return logs.find((log) => log.eventId === eventId)?.inGameTime ?? 0;
+    } else if (logId) {
       // TODO: Þetta ætti aldrei að þurfa að uppfæra.
-      return logs.find((log) => log.id === timer.logId)?.inGameTime ?? 0;
+      return logs.find((log) => log.id === logId)?.inGameTime ?? 0;
     }
     return 0;
-  }, [logs, timer]);
+  }, [logs, durationId, eventId, logId]);
 
   const howLongAgo = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
@@ -42,17 +49,18 @@ function Timer({ timer }: Props) {
     <div style={{ display: 'flex', flexDirection: 'column', margin: 5, padding: 5, border: '1px solid grey', borderRadius: 5 }}>
       <div style={{ paddingBottom: 5, display: 'flex'}}>
         <div>
-          {timer.name}
+          {name}
         </div>
         <div style={{ marginLeft: 'auto' }}>
           {howLongAgo(time - getStartTime())}
+          <button onClick={() => remove(id)}><FontAwesomeIcon icon={faXmark} color="red"></FontAwesomeIcon></button>
         </div>
       </div>
-      {timer.finishAtInGameTime && (
-      <progress className={time > timer.finishAtInGameTime ? 'complete' : undefined} value={time-getStartTime()} max={timer.finishAtInGameTime}></progress>
+      {finishAtInGameTime && (
+      <progress className={time > finishAtInGameTime ? 'complete' : undefined} value={time-getStartTime()} max={finishAtInGameTime}></progress>
       )}
     </div>
   );
 }
 
-export default Timer;
+export default TimerItem;

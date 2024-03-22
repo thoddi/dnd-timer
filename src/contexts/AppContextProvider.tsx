@@ -1,7 +1,7 @@
 import React, { createContext } from "react";
 import useInGameTime from "../hooks/useInGameTime";
-import useLocalStorageList, { Create } from "../hooks/useLocalStorageList";
-import { Log, Timer } from "./AppContext.type";
+import useLocalStorageList, { LocalStorageInterface } from "../hooks/useLocalStorageList";
+import { Duration, InGameEvent, Log, Speed, Timer } from "./AppContext.type";
 
 interface TimeContextType {
   time: number;
@@ -9,33 +9,35 @@ interface TimeContextType {
   addTime(seconds: number): void;
 }
 
-interface LogContextType {
-  logs: Log[];
-  addLog(item: Create<Log>): void;
-}
-
-interface TimerContextType {
-  timers: Timer[];
-  addTimer(item: Create<Timer>): void;
-}
-
 export const TimeContext = createContext<TimeContextType>({} as TimeContextType);
-export const LogContext = createContext<LogContextType>({} as LogContextType);
-export const TimerContext = createContext<TimerContextType>({} as TimerContextType);
+export const LogContext = createContext<LocalStorageInterface<Log>>({} as LocalStorageInterface<Log>);
+export const TimerContext = createContext<LocalStorageInterface<Timer>>({} as LocalStorageInterface<Timer>);
+export const SpeedContext = createContext<LocalStorageInterface<Speed>>({} as LocalStorageInterface<Speed>);
+export const DurationContext = createContext<LocalStorageInterface<Duration>>({} as LocalStorageInterface<Duration>);
+export const EventContext = createContext<LocalStorageInterface<InGameEvent>>({} as LocalStorageInterface<InGameEvent>);
 
 interface Props {
   children: React.ReactNode;
 }
 function AppContextProvider({ children }: Props) {
   const [time, setPlaySpeed, addTime] = useInGameTime();
-  const [logs, addLog] = useLocalStorageList<Log>('logs');
-  const [timers, addTimer] = useLocalStorageList<Timer>('timer');
+  const logs = useLocalStorageList<Log>('logs');
+  const timers = useLocalStorageList<Timer>('timers');
+  const speeds = useLocalStorageList<Speed>('speeds')
+  const durations = useLocalStorageList<Duration>('durations');
+  const events = useLocalStorageList<InGameEvent>('events');
 
   return (
     <TimeContext.Provider value={{ time, setPlaySpeed, addTime }}>
-      <LogContext.Provider value={{ logs:[...logs].reverse(), addLog }}>
-        <TimerContext.Provider value={{ timers, addTimer }}>
-          {children}
+      <LogContext.Provider value={logs}>
+        <TimerContext.Provider value={timers}>
+          <SpeedContext.Provider value={speeds}>
+            <DurationContext.Provider value={durations}>
+              <EventContext.Provider value={events}>
+                {children}
+              </EventContext.Provider>
+            </DurationContext.Provider>
+          </SpeedContext.Provider>
         </TimerContext.Provider>
       </LogContext.Provider>
     </TimeContext.Provider>

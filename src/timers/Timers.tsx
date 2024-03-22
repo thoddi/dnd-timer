@@ -1,15 +1,21 @@
 import { useContext } from "react";
 import { TimerContext } from "../contexts/AppContextProvider";
-import Timer from "./Timer";
+import TimerItem from "./Timer";
 
 function Timers() {
-  const { timers } = useContext(TimerContext);
+  const { list: timers } = useContext(TimerContext);
 
   return (
     <div className="timers" style={{ display: 'flex', flexDirection: 'column' }}>
       <h2>Teljarar</h2>
       {timers.map((timer) => (
-        <Timer key={timer.id} timer={timer}></Timer>
+        <TimerItem key={timer.id}
+                   id={timer.id}
+                   name={timer.name}
+                   durationId={timer.durationId}
+                   eventId={timer.eventId}
+                   logId={timer.logId}
+                   finishAtInGameTime={timer.finishAtInGameTime}></TimerItem>
       ))}
     </div>
   );

@@ -11,7 +11,7 @@ function App() {
     <AppContextProvider>
       <div className="App">
         <Logs></Logs>
-        <div>
+        <div style={{ flex: 1 }}>
           <Time></Time>
           <Timers></Timers>
         </div>

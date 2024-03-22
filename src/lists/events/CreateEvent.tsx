@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { InGameEvent } from "../../contexts/AppContext.type";
-import { Create } from "../../hooks/useLocalStorageList";
+import { AddFunction } from "../../hooks/useLocalStorageList";
 
 interface Props {
-  onAdd: (item: Create<InGameEvent>) => void;
+  onAdd: AddFunction<InGameEvent>;
 }
 
 function CreateEvent({ onAdd }: Props) {

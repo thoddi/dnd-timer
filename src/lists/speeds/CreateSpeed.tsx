@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Speed } from "../../contexts/AppContext.type";
-import { Create } from "../../hooks/useLocalStorageList";
+import { AddFunction } from "../../hooks/useLocalStorageList";
 
 interface Props {
-  onAdd: (item: Create<Speed>) => void;
+  onAdd: AddFunction<Speed>;
 }
 
 function CreateSpeed({ onAdd }: Props) {
@@ -19,7 +19,7 @@ function CreateSpeed({ onAdd }: Props) {
   return (
     <div>
       Vista nýjan tímahraða.
-      <input value={name} onChange={(e) => setName(e.target.value)} />
+      <input placeholder="Nafn" value={name} onChange={(e) => setName(e.target.value)} />
       <input type="number" value={speed} onChange={(e) => setSpeed(Number(e.target.value))} />
       <button onClick={onSave}>Vista</button>
     </div>

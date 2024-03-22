@@ -9,10 +9,6 @@
   align-items: stretch;
 }
 
-.time {
-  flex: 1;
-}
-
 .lists {
   flex: 1;
 }

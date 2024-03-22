@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Create } from "../../hooks/useLocalStorageList";
+import { AddFunction } from "../../hooks/useLocalStorageList";
 import { Duration } from "../../contexts/AppContext.type";
 
 interface Props {
-  onAdd: (item: Create<Duration>) => void;
+  onAdd: AddFunction<Duration>;
 }
 
 function CreateDuration({ onAdd }: Props) {
