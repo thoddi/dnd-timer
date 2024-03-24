@@ -1,6 +1,6 @@
 import React, { createContext } from "react";
 import useInGameTime from "../hooks/useInGameTime";
-import useLocalStorageList, { LocalStorageInterface } from "../hooks/useLocalStorageList";
+import useLocalStorageList, { StorageInterface } from "../hooks/useLocalStorageList";
 import { Duration, InGameEvent, Log, Speed, Timer } from "./AppContext.type";
 
 interface TimeContextType {
@@ -10,11 +10,11 @@ interface TimeContextType {
 }
 
 export const TimeContext = createContext<TimeContextType>({} as TimeContextType);
-export const LogContext = createContext<LocalStorageInterface<Log>>({} as LocalStorageInterface<Log>);
-export const TimerContext = createContext<LocalStorageInterface<Timer>>({} as LocalStorageInterface<Timer>);
-export const SpeedContext = createContext<LocalStorageInterface<Speed>>({} as LocalStorageInterface<Speed>);
-export const DurationContext = createContext<LocalStorageInterface<Duration>>({} as LocalStorageInterface<Duration>);
-export const EventContext = createContext<LocalStorageInterface<InGameEvent>>({} as LocalStorageInterface<InGameEvent>);
+export const LogContext = createContext<StorageInterface<Log>>({} as StorageInterface<Log>);
+export const TimerContext = createContext<StorageInterface<Timer>>({} as StorageInterface<Timer>);
+export const SpeedContext = createContext<StorageInterface<Speed>>({} as StorageInterface<Speed>);
+export const DurationContext = createContext<StorageInterface<Duration>>({} as StorageInterface<Duration>);
+export const EventContext = createContext<StorageInterface<InGameEvent>>({} as StorageInterface<InGameEvent>);
 
 interface Props {
   children: React.ReactNode;

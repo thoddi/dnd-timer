@@ -1,19 +1,20 @@
-import './App.css';
-import Logs from './logs/Logs';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.scss';
+import LogList from './logs/LogList';
 import Time from './time/Time';
 import Lists from './lists/Lists';
 import AppContextProvider from './contexts/AppContextProvider';
-import Timers from './timers/Timers';
+import TimerList from './timers/TimerList';
 
 function App() {
 
   return (
     <AppContextProvider>
       <div className="App">
-        <Logs></Logs>
+        <LogList></LogList>
         <div style={{ flex: 1 }}>
           <Time></Time>
-          <Timers></Timers>
+          <TimerList></TimerList>
         </div>
         <Lists></Lists>
       </div>

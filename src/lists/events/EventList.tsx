@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
-import Modal from "../../Modal";
-import CreateEvent from "./CreateEvent";
+import CreateEventModal from "./CreateEventModal";
 import { EventContext } from "../../contexts/AppContextProvider";
 import EventItem from "./EventItem";
 
@@ -17,11 +16,7 @@ function EventList() {
           <EventItem key={event.id} id={event.id} name={event.name}></EventItem>
         ))}
       </div>
-      {isCreatingEvent && (
-        <Modal onClose={() => setIsCreatingEvent(false)}>
-          <CreateEvent onAdd={events.add}></CreateEvent>
-        </Modal>
-      )}
+      <CreateEventModal show={isCreatingEvent} onHide={() => setIsCreatingEvent(false)}></CreateEventModal>
     </div>
   );
 }

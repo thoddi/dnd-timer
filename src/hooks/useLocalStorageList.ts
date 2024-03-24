@@ -10,13 +10,13 @@ type Create<T extends { id: number }> = Omit<T, "id">;
 export type AddFunction<T extends HasId> = (item: Create<T>) => void;
 type RemoveFunction = (id: number) => void;
 
-export interface LocalStorageInterface<T extends HasId> {
+export interface StorageInterface<T extends HasId> {
   list: T[];
   add: AddFunction<T>;
   remove: RemoveFunction;
 }
 
-function useLocalStorageList<T extends HasId>(key: string): LocalStorageInterface<T> {
+function useLocalStorageList<T extends HasId>(key: string): StorageInterface<T> {
   const [list, setList] = useState<T[]>(JSON.parse(localStorage.getItem(key) ?? '[]'));
   const sequence = new Sequence(key);
 

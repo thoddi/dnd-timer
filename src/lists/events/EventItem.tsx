@@ -2,8 +2,7 @@ import { useContext, useState } from "react";
 import { EventContext, LogContext, TimeContext } from "../../contexts/AppContextProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import Modal from "../../Modal";
-import CreateTimer from "../../timers/CreateTimer";
+import CreateTimerModal from "../../timers/CreateTimerModal";
 
 interface Props {
   id: number;
@@ -23,11 +22,7 @@ function EventItem({ id, name }: Props) {
       <button style={{ marginLeft: 'auto' }} onClick={() => addLog({ text: name, inGameTime: time, eventId: id })}>Kveikja</button>
       <button onClick={() => setIsCreatingTimer(true)}>Mæla</button>
       <button onClick={() => remove(id)}><FontAwesomeIcon icon={faXmark} color="red"></FontAwesomeIcon></button>
-      {isCreatingTimer && (
-        <Modal onClose={() => setIsCreatingTimer(false)}>
-          <CreateTimer eventId={id}></CreateTimer>
-        </Modal>
-      )}
+      <CreateTimerModal show={isCreatingTimer} onHide={() => setIsCreatingTimer(false)} eventId={id}></CreateTimerModal>
     </div>
   );
 }

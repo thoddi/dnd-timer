@@ -1,13 +1,10 @@
 import { useContext, useState } from "react";
-import Modal from "../../Modal";
-import CreateDuration from "./CreateDuration";
+import CreateDurationModal from "./CreateDurationModal";
 import { DurationContext } from "../../contexts/AppContextProvider";
-import CreateTimer from "../../timers/CreateTimer";
 import DurationItem from "./DurationItem";
 
 function DurationList() {
   const [isCreatingDuration, setIsCreatingDuration] = useState(false);
-  const [isCreatingTimerforDuration, setIsCreatingTimer] = useState<number>();
 
   const durations = useContext(DurationContext);
 
@@ -19,16 +16,7 @@ function DurationList() {
           <DurationItem key={duration.id} id={duration.id} name={duration.name} duration={duration.duration}></DurationItem>
         ))}
       </div>
-      {isCreatingDuration && (
-        <Modal onClose={() => setIsCreatingDuration(false)}>
-          <CreateDuration onAdd={durations.add}></CreateDuration>
-        </Modal>
-      )}
-      {isCreatingTimerforDuration && (
-        <Modal onClose={() => setIsCreatingTimer(undefined)}>
-          <CreateTimer durationId={isCreatingTimerforDuration}></CreateTimer>
-        </Modal>
-      )}
+      <CreateDurationModal show={isCreatingDuration} onHide={() => setIsCreatingDuration(false)}></CreateDurationModal>
     </div>
   );
 }

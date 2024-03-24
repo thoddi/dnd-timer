@@ -1,6 +1,8 @@
 .App {
   display: flex;
   height: 100%;
+  padding: 0.3em;
+  gap: 0.3em;
   align-items: stretch;
 }
 
@@ -18,4 +20,18 @@ progress.complete::-moz-progress-bar {
 }
 progress.complete::-webkit-progress-value {
   background: red;
+}
+
+.hover-container {
+  &:not(:hover) .show-on-hover {
+    display: none !important;
+  }
+  &:hover {
+    .show-on-hover {
+      display: block;
+    }
+    .hide-on-hover {
+      display: none !important;
+    }
+  }
 }

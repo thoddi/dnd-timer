@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
-import Modal from "../../Modal";
-import CreateSpeed from "./CreateSpeed";
+import CreateSpeedModal from "./CreateSpeedModal";
 import SpeedItem from "./SpeedItem";
 import { SpeedContext } from "../../contexts/AppContextProvider";
 
@@ -18,11 +17,7 @@ function SpeedList() {
           <SpeedItem key={speed.id} id={speed.id} name={speed.name} speed={speed.speed}></SpeedItem>
         ))}
       </div>
-      {isCreating && (
-        <Modal onClose={() => setIsCreating(false)}>
-          <CreateSpeed onAdd={speeds.add}></CreateSpeed>
-        </Modal>
-      )}
+      <CreateSpeedModal show={isCreating} onHide={() => setIsCreating(false)}></CreateSpeedModal>
     </div>
   );
 }
