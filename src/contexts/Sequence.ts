@@ -5,7 +5,7 @@ class Sequence {
     this.key = `${key}-sequence`;
   }
 
-  get next() {
+  get nextValue() {
     const id = Number(localStorage.getItem(this.key) || 1);
     localStorage.setItem(this.key, `${id + 1}`)
     return id;

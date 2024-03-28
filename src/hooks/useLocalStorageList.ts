@@ -5,7 +5,7 @@ interface HasId {
   id: number
 }
 
-type Create<T extends { id: number }> = Omit<T, "id">;
+export type Create<T extends { id: number }> = Omit<T, "id">;
 
 export type AddFunction<T extends HasId> = (item: Create<T>) => void;
 type RemoveFunction = (id: number) => void;
@@ -16,9 +16,29 @@ export interface StorageInterface<T extends HasId> {
   remove: RemoveFunction;
 }
 
-function useLocalStorageList<T extends HasId>(key: string): StorageInterface<T> {
-  const [list, setList] = useState<T[]>(JSON.parse(localStorage.getItem(key) ?? '[]'));
+/**
+ * Sækir núverandi stöðu í localstorage og skilar.
+ * @param key Lykill að gildi í localstorage.
+ * @param sequence Object sem heldur utanum næsta raðnúmer.
+ * @param initialState Ef ekkert gildi er til í localstorage, þá er þetta vistað sem fyrsta gildi.
+ * @returns Listi.
+ */
+const setInitialState = (key: string, sequence: Sequence, initialState?: Create<any>[]) => {
+  const storedState = localStorage.getItem(key);
+  if (storedState === null) {
+    if (initialState) {
+      const newState = initialState.map((it) => ({ id: sequence.nextValue, ...it}));
+      localStorage.setItem(key, JSON.stringify(newState));
+      return newState;
+    }
+    return [];
+  }
+  return JSON.parse(storedState);
+};
+
+function useLocalStorageList<T extends HasId>(key: string, initialState?: Create<T>[]): StorageInterface<T> {
   const sequence = new Sequence(key);
+  const [list, setList] = useState<T[]>(setInitialState(key, sequence, initialState));
 
   const replaceList = (newList: T[]) => {
     localStorage.setItem(key, JSON.stringify(newList));
@@ -26,7 +46,7 @@ function useLocalStorageList<T extends HasId>(key: string): StorageInterface<T> 
   };
 
   const add = (item: Create<T>) => {
-    const model = { id: sequence.next, ...item } as T;
+    const model = { id: sequence.nextValue, ...item } as T;
     const newList = [...list, model];
     replaceList(newList);
   }

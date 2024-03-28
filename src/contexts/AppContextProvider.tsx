@@ -1,7 +1,8 @@
 import React, { createContext } from "react";
 import useInGameTime from "../hooks/useInGameTime";
-import useLocalStorageList, { StorageInterface } from "../hooks/useLocalStorageList";
+import useLocalStorageList, { Create, StorageInterface } from "../hooks/useLocalStorageList";
 import { Duration, InGameEvent, Log, Speed, Timer } from "./AppContext.type";
+import { unitsOfTime } from "../unitsOfTime";
 
 interface TimeContextType {
   time: number;
@@ -16,16 +17,43 @@ export const SpeedContext = createContext<StorageInterface<Speed>>({} as Storage
 export const DurationContext = createContext<StorageInterface<Duration>>({} as StorageInterface<Duration>);
 export const EventContext = createContext<StorageInterface<InGameEvent>>({} as StorageInterface<InGameEvent>);
 
+const speedsInitialState = [
+  {
+    name: 'Rauntími',
+    speed: 1,
+  },
+  {
+    name: 'Spilunartími',
+    speed: 2,
+  }
+] as Create<Speed>[];
+const durationsInitialState = [
+  {
+    name: 'Long rest',
+    duration: unitsOfTime.hours.seconds * 8,
+  },
+  {
+    name: 'Short rest',
+    duration: unitsOfTime.minutes.seconds * 30,
+  }
+] as Create<Duration>[];
+const eventsInitalState = [
+  {
+    name: 'Borðað',
+  }
+] as Create<InGameEvent>[];
+
 interface Props {
   children: React.ReactNode;
 }
+
 function AppContextProvider({ children }: Props) {
   const [time, setPlaySpeed, addTime] = useInGameTime();
   const logs = useLocalStorageList<Log>('logs');
   const timers = useLocalStorageList<Timer>('timers');
-  const speeds = useLocalStorageList<Speed>('speeds')
-  const durations = useLocalStorageList<Duration>('durations');
-  const events = useLocalStorageList<InGameEvent>('events');
+  const speeds = useLocalStorageList<Speed>('speeds', speedsInitialState)
+  const durations = useLocalStorageList<Duration>('durations', durationsInitialState);
+  const events = useLocalStorageList<InGameEvent>('events', eventsInitalState);
 
   return (
     <TimeContext.Provider value={{ time, setPlaySpeed, addTime }}>
