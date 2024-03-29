@@ -39,12 +39,6 @@ function EventItem({ id, name }: Props) {
           </div>
         </div>
       </Card>
-    {/* <div style={{ display: 'flex', margin: 5, padding: 5, border: '1px solid grey', borderRadius: 5 }}>
-      {name}
-      <button style={{ marginLeft: 'auto' }} onClick={() => addLog({ text: name, inGameTime: time, eventId: id })}>Kveikja</button>
-      <button onClick={() => setIsCreatingTimer(true)}>Mæla</button>
-      <button onClick={() => remove(id)}><FontAwesomeIcon icon={faXmark} color="red"></FontAwesomeIcon></button>
-    </div> */}
       <CreateTimerModal show={isCreatingTimer} onHide={() => setIsCreatingTimer(false)} eventId={id}></CreateTimerModal>
     </>
   );
