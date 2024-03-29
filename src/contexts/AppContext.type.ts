@@ -18,7 +18,7 @@ export interface Timer {
   eventId?: number;
   durationId?: number;
   name: string;
-  finishAtInGameTime?: number;
+  finishAfterSeconds?: number;
   soundAtProgressState?: number;
 }
 

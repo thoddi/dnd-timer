@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
-import { LogContext, TimeContext } from "../contexts/AppContextProvider";
-import CreateTimerModal from "../timers/CreateTimerModal";
+import { LogContext, TimeContext } from "../../contexts/AppContextProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { Button } from "react-bootstrap";
 import { faHourglassHalf } from "@fortawesome/free-regular-svg-icons";
+import CreateTimerModal from "../timers/CreateTimerModal";
 
 interface Props {
   id: number;

@@ -1,8 +1,12 @@
 import { useContext } from "react"
 import { TimeContext } from "../contexts/AppContextProvider";
+import Clock from "./Clock";
+import Button from "react-bootstrap/esm/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
 
 function Time() {
-  const { time, setPlaySpeed } = useContext(TimeContext);
+  const { time, isPlaying, setPlaySpeed } = useContext(TimeContext);
 
   const formatTime = (secondCount: number) => {
     const seconds = secondCount % 60;
@@ -16,11 +20,15 @@ function Time() {
   };
 
   return (
-    <div className="time">
+    <div className="time d-flex flex-column align-items-center">
       {formatTime(time)}
+      <Clock></Clock>
       <div>
-        <button onClick={() => setPlaySpeed(0)}>Pause</button>
-        <button onClick={() => setPlaySpeed(1)}>Play</button>
+        {isPlaying ? (
+          <Button variant="danger" onClick={() => setPlaySpeed(0)}><FontAwesomeIcon icon={faPause}></FontAwesomeIcon></Button>
+        ) : (
+          <Button variant="success" onClick={() => setPlaySpeed(1)}><FontAwesomeIcon icon={faPlay}></FontAwesomeIcon></Button>
+        )}
       </div>
     </div>
   );

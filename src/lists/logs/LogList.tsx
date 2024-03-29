@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
 import CreateLogModal from "./CreateLogModal";
-import { LogContext } from "../contexts/AppContextProvider";
+import { LogContext } from "../../contexts/AppContextProvider";
 import LogItem from "./LogItem";
-import List from "../utilityComponents/list/List";
+import List from "../../utilityComponents/list/List";
 import Card from "react-bootstrap/Card";
 import CardBody from "react-bootstrap/CardBody";
 import CardHeader from "react-bootstrap/CardHeader";
@@ -17,7 +17,7 @@ function LogList() {
   return (
     <div className="logs">
       <Card>
-        <CardHeader className="d-flex justify-content-between">
+        <CardHeader className="d-flex justify-content-between p-2">
           <h5>Atburðir</h5>
           <Button variant="outline-secondary" size="sm" onClick={() => setIsCreating(true)}><FontAwesomeIcon icon={faPlus}></FontAwesomeIcon></Button>
         </CardHeader>

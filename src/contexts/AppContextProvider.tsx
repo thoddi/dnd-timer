@@ -6,6 +6,7 @@ import { unitsOfTime } from "../unitsOfTime";
 
 interface TimeContextType {
   time: number;
+  isPlaying: boolean;
   setPlaySpeed(speed: number): void;
   addTime(seconds: number): void;
 }
@@ -48,7 +49,7 @@ interface Props {
 }
 
 function AppContextProvider({ children }: Props) {
-  const [time, setPlaySpeed, addTime] = useInGameTime();
+  const [time, isPlaying, setPlaySpeed, addTime] = useInGameTime();
   const logs = useLocalStorageList<Log>('logs');
   const timers = useLocalStorageList<Timer>('timers');
   const speeds = useLocalStorageList<Speed>('speeds', speedsInitialState)
@@ -56,7 +57,7 @@ function AppContextProvider({ children }: Props) {
   const events = useLocalStorageList<InGameEvent>('events', eventsInitalState);
 
   return (
-    <TimeContext.Provider value={{ time, setPlaySpeed, addTime }}>
+    <TimeContext.Provider value={{ time, isPlaying, setPlaySpeed, addTime }}>
       <LogContext.Provider value={logs}>
         <TimerContext.Provider value={timers}>
           <SpeedContext.Provider value={speeds}>

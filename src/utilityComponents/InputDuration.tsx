@@ -27,7 +27,7 @@ function InputDuration({ value, onChange: _onChange }: Props) {
         align="end"
         title={unitsOfTime[unit].name}>
           {Object.entries(unitsOfTime).map(([key, value]) => (
-            <Dropdown.Item active={unit === key} onClick={() => setUnit(key)}>{value.name}</Dropdown.Item>
+            <Dropdown.Item key={key} active={unit === key} onClick={() => setUnit(key)}>{value.name}</Dropdown.Item>
           ))}
       </DropdownButton>
     </InputGroup>

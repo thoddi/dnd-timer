@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
-import { TimerContext } from "../contexts/AppContextProvider";
-import Modal from "../utilityComponents/Modal";
-import FormGroup from "../utilityComponents/FormGroup";
+import Modal from "../../utilityComponents/Modal";
+import FormGroup from "../../utilityComponents/FormGroup";
 import { Form } from "react-bootstrap";
-import InputDuration from "../utilityComponents/InputDuration";
+import InputDuration from "../../utilityComponents/InputDuration";
+import { TimerContext } from "../../contexts/AppContextProvider";
 
 interface Props {
   show: boolean;
@@ -19,7 +19,7 @@ function CreateTimerModal({ show, onHide: _onHide, durationId, eventId, logId }:
   const timers = useContext(TimerContext);
 
   const onSave = () => {
-    timers.add({ name, eventId, logId, durationId, finishAtInGameTime: timerGoal || undefined });
+    timers.add({ name, eventId, logId, durationId, finishAfterSeconds: timerGoal || undefined });
     onHide();
   };
 

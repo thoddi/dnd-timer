@@ -1,10 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
-import LogList from './logs/LogList';
+import LogList from './lists/logs/LogList';
 import Time from './time/Time';
 import Lists from './lists/Lists';
 import AppContextProvider from './contexts/AppContextProvider';
-import TimerList from './timers/TimerList';
+import TimerList from './lists/timers/TimerList';
 
 function App() {
 

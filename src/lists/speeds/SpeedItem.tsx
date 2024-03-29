@@ -1,7 +1,9 @@
 import { useContext } from "react";
 import { SpeedContext, TimeContext } from "../../contexts/AppContextProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faPlay, faXmark } from "@fortawesome/free-solid-svg-icons";
+import Card from "react-bootstrap/esm/Card";
+import { Button } from "react-bootstrap";
 
 interface Props {
   id: number;
@@ -14,12 +16,19 @@ function SpeedItem({ id, name, speed }: Props) {
   const { remove } = useContext(SpeedContext);
 
   return (
-    <div style={{ display: 'flex', margin: 5, padding: 5, border: '1px solid grey', borderRadius: 5 }}>
-      {name}
-      <button style={{ marginLeft: 'auto' }} onClick={() => setPlaySpeed(speed)}>Kveikja</button>
-      
-      <button onClick={() => remove(id)}><FontAwesomeIcon icon={faXmark} color="red"></FontAwesomeIcon></button>
-    </div>
+    <Card className="p-2 mt-2">
+      <div className="d-flex w-100 justify-content-between">
+        <div>
+          <Button variant="outline-success" size="sm" onClick={() => setPlaySpeed(speed)}>
+            <FontAwesomeIcon icon={faPlay}></FontAwesomeIcon>
+          </Button>
+          &ensp;{name}
+        </div>
+        <Button variant="outline-danger" size="sm" onClick={() => remove(id)}>
+          <FontAwesomeIcon icon={faXmark}></FontAwesomeIcon>
+        </Button>
+      </div>
+    </Card>
   );
 }
 

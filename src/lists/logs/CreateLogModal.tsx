@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
-import Modal from "../utilityComponents/Modal";
-import { LogContext, TimeContext } from "../contexts/AppContextProvider";
-import FormGroup from "../utilityComponents/FormGroup";
+import Modal from "../../utilityComponents/Modal";
+import { LogContext, TimeContext } from "../../contexts/AppContextProvider";
+import FormGroup from "../../utilityComponents/FormGroup";
 
 interface Props {
   show: boolean;
