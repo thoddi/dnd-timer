@@ -9,16 +9,16 @@ import TimerList from './lists/timers/TimerList';
 function App() {
 
   return (
-    <AppContextProvider>
-      <div className="App">
+    <div className="App">
+      <AppContextProvider>
         <LogList></LogList>
         <div style={{ flex: 1 }}>
           <Time></Time>
           <TimerList></TimerList>
         </div>
         <Lists></Lists>
-      </div>
       </AppContextProvider>
+    </div>
   );
 }
 

@@ -7,11 +7,16 @@ interface HasId {
 
 export type Create<T extends { id: number }> = Omit<T, "id">;
 
-export type AddFunction<T extends HasId> = (item: Create<T>) => void;
+export type AddFunction<T extends HasId> = (item: Create<T>) => number;
 type RemoveFunction = (id: number) => void;
 
 export interface StorageInterface<T extends HasId> {
   list: T[];
+  /**
+   * Adds an item to the storage. Returns its new ID.
+   * @param item - The item to add.
+   * @returns The ID of the added item.
+   */
   add: AddFunction<T>;
   remove: RemoveFunction;
 }
@@ -45,16 +50,17 @@ function useLocalStorageList<T extends HasId>(key: string, initialState?: Create
     setList(newList);
   };
 
-  const add = (item: Create<T>) => {
+  const add = (item: Create<T>): number => {
     const model = { id: sequence.nextValue, ...item } as T;
     const newList = [...list, model];
     replaceList(newList);
-  }
+    return model.id;
+  };
 
   const remove = (id: number) => {
     const newList = list.filter((it) => it.id !== id);
     replaceList(newList);
-  }
+  };
 
   return { list, add, remove };
 }

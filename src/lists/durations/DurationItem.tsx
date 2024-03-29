@@ -17,11 +17,11 @@ function DurationItem({ id, name, duration }: Props) {
 
   const { remove } = useContext(DurationContext);
   const { add: addLog } = useContext(LogContext);
-  const { time, addTime } = useContext(TimeContext);
+  const { addTime } = useContext(TimeContext);
 
   const applyDuration = () => {
+    const time = addTime(duration);
     addLog({ text: name, inGameTime: time, durationId: id });
-    addTime(duration);
   };
 
   return (
@@ -44,7 +44,7 @@ function DurationItem({ id, name, duration }: Props) {
           </div>
         </div>
       </Card>
-      <CreateTimerModal show={isCreatingTimer} onHide={() => setIsCreatingTimer(false)} eventId={id}></CreateTimerModal>
+      <CreateTimerModal show={isCreatingTimer} onHide={() => setIsCreatingTimer(false)} durationId={id}></CreateTimerModal>
     </>
   );
 }

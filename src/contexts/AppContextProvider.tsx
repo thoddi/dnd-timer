@@ -8,7 +8,12 @@ interface TimeContextType {
   time: number;
   isPlaying: boolean;
   setPlaySpeed(speed: number): void;
-  addTime(seconds: number): void;
+  /**
+   * Adds a duration to the current time and saves it in local storage.
+   * @param seconds Seconds to add to time.
+   * @returns The new time after adding duration.
+   */
+  addTime(seconds: number): number;
 }
 
 export const TimeContext = createContext<TimeContextType>({} as TimeContextType);
