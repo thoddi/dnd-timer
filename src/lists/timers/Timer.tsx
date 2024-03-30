@@ -22,9 +22,9 @@ function TimerItem({ id, durationId, eventId, logId, name, finishAfterSeconds }:
 
   const getStartTime = useCallback(() => {
     if (durationId) {
-      return [...logs].reverse().find((log) => log.durationId === durationId)?.inGameTime ?? 0;
+      return logs.findLast((log) => log.durationId === durationId)?.inGameTime ?? 0;
     } else if (eventId) {
-      return [...logs].reverse().find((log) => log.eventId === eventId)?.inGameTime ?? 0;
+      return logs.findLast((log) => log.eventId === eventId)?.inGameTime ?? 0;
     } else if (logId) {
       // TODO: Þetta ætti aldrei að þurfa að uppfæra.
       return logs.find((log) => log.id === logId)?.inGameTime ?? 0;
