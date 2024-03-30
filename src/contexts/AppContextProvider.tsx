@@ -37,12 +37,16 @@ const durationsInitialState = [
   {
     name: 'Long rest',
     duration: unitsOfTime.hours.seconds * 8,
+    timer: {
+      name: 'Seinast sofið',
+      finishAfterSeconds: unitsOfTime.days.seconds,
+    },
   },
   {
     name: 'Short rest',
     duration: unitsOfTime.minutes.seconds * 30,
   }
-] as Create<Duration>[];
+] as (Create<Duration> & { timer?: Create<Timer> })[] ;
 const eventsInitalState = [
   {
     name: 'Borðað',
@@ -54,12 +58,28 @@ interface Props {
 }
 
 function AppContextProvider({ children }: Props) {
+  const setInitialState = localStorage.length === 0;
   const [time, isPlaying, setPlaySpeed, addTime] = useInGameTime();
   const logs = useLocalStorageList<Log>('logs');
   const timers = useLocalStorageList<Timer>('timers');
-  const speeds = useLocalStorageList<Speed>('speeds', speedsInitialState)
-  const durations = useLocalStorageList<Duration>('durations', durationsInitialState);
-  const events = useLocalStorageList<InGameEvent>('events', eventsInitalState);
+  const speeds = useLocalStorageList<Speed>('speeds')
+  const durations = useLocalStorageList<Duration>('durations');
+  const events = useLocalStorageList<InGameEvent>('events');
+
+  if (setInitialState) {
+    for (const speed of speedsInitialState) {
+      speeds.add(speed);
+    }
+    for (const { timer, ...duration} of durationsInitialState) {
+      const id = durations.add(duration);
+      if  (timer) {
+        timers.add({...timer, durationId: id});
+      }
+    }
+    for (const event of eventsInitalState) {
+      events.add(event);
+    }
+  }
 
   return (
     <TimeContext.Provider value={{ time, isPlaying, setPlaySpeed, addTime }}>

@@ -21,45 +21,26 @@ export interface StorageInterface<T extends HasId> {
   remove: RemoveFunction;
 }
 
-/**
- * Sækir núverandi stöðu í localstorage og skilar.
- * @param key Lykill að gildi í localstorage.
- * @param sequence Object sem heldur utanum næsta raðnúmer.
- * @param initialState Ef ekkert gildi er til í localstorage, þá er þetta vistað sem fyrsta gildi.
- * @returns Listi.
- */
-const setInitialState = (key: string, sequence: Sequence, initialState?: Create<any>[]) => {
-  const storedState = localStorage.getItem(key);
-  if (storedState === null) {
-    if (initialState) {
-      const newState = initialState.map((it) => ({ id: sequence.nextValue, ...it}));
-      localStorage.setItem(key, JSON.stringify(newState));
-      return newState;
-    }
-    return [];
-  }
-  return JSON.parse(storedState);
-};
-
-function useLocalStorageList<T extends HasId>(key: string, initialState?: Create<T>[]): StorageInterface<T> {
+function useLocalStorageList<T extends HasId>(key: string): StorageInterface<T> {
   const sequence = new Sequence(key);
-  const [list, setList] = useState<T[]>(setInitialState(key, sequence, initialState));
-
-  const replaceList = (newList: T[]) => {
-    localStorage.setItem(key, JSON.stringify(newList));
-    setList(newList);
-  };
+  const [list, setList] = useState<T[]>(JSON.parse(localStorage.getItem(key) || '[]'));
 
   const add = (item: Create<T>): number => {
     const model = { id: sequence.nextValue, ...item } as T;
-    const newList = [...list, model];
-    replaceList(newList);
+    setList((oldList) => {
+      const newList = [...oldList, model];
+      localStorage.setItem(key, JSON.stringify(newList));
+      return newList;
+    });
     return model.id;
   };
 
   const remove = (id: number) => {
-    const newList = list.filter((it) => it.id !== id);
-    replaceList(newList);
+    setList((oldList) => {
+      const newList = oldList.filter((it) => it.id !== id);
+      localStorage.setItem(key, JSON.stringify(newList));
+      return newList;
+    });
   };
 
   return { list, add, remove };
