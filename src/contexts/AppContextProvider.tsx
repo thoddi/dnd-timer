@@ -25,13 +25,17 @@ export const EventContext = createContext<StorageInterface<InGameEvent>>({} as S
 
 const speedsInitialState = [
   {
-    name: 'Rauntími',
-    speed: 1,
-  },
-  {
     name: 'Spilunartími',
     speed: 2,
-  }
+  },  
+  {
+    name: 'Leita að loot-i',
+    speed: 60,
+  },
+  {
+    name: 'Montosh',
+    speed: unitsOfTime.hours.seconds * 8,
+  },
 ] as Create<Speed>[];
 const durationsInitialState = [
   {
