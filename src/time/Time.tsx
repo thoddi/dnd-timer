@@ -4,6 +4,7 @@ import Clock from "./Clock";
 import Button from "react-bootstrap/esm/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
+import "./day-phase-display";
 
 function Time() {
   const { time, isPlaying, setPlaySpeed } = useContext(TimeContext);
@@ -21,6 +22,7 @@ function Time() {
 
   return (
     <div className="time d-flex flex-column align-items-center">
+      {/* <day-phase-display></day-phase-display> */}
       {formatTime(time)}
       <Clock></Clock>
       <div>
