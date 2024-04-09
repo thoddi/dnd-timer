@@ -1,0 +1,6 @@
+[
+  {
+    "version": "0.2.0",
+    "changes": ["Bætt við möguleikanum á að \"import\"-a og \"export\"-a gögnum úr appinu. Þetta er aðallega hugsað til að geta fært gögn yfir á annan vafra."]
+  }
+]

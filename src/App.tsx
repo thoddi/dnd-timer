@@ -5,7 +5,7 @@ import Time from './time/Time';
 import Lists from './lists/Lists';
 import AppContextProvider from './contexts/AppContextProvider';
 import TimerList from './lists/timers/TimerList';
-import './top-panel';
+import './topPanel/top-panel';
 
 function App() {
 

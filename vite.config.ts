@@ -5,6 +5,9 @@ import react from '@vitejs/plugin-react-swc';
 export default defineConfig({
   base: '/',
   plugins: [react({ tsDecorators: true })],
+  define: {
+    APP_VERSION: JSON.stringify(process.env.npm_package_version),
+  },
   // test: {
   //   globals: true,
   //   environment: 'jsdom',

@@ -1,6 +1,7 @@
 import { SlDialog, SlTextarea } from '@shoelace-style/shoelace';
 import { LitElement, css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
+import './change-log-button.ts';
 
 @customElement('top-panel')
 export class TopPanel extends LitElement {
@@ -8,7 +9,7 @@ export class TopPanel extends LitElement {
     .top-panel {
       padding: 0.5rem;
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
       border-bottom: 1px solid lightgray;
     }
     #import-text {
@@ -22,6 +23,8 @@ export class TopPanel extends LitElement {
   render () {
     return html`
       <div class="top-panel">
+        <change-log-button></change-log-button>
+        <strong>D&D Timer</strong>
         <sl-button variant="default" size="small" circle @click=${this.openDialog}>
           <sl-icon name="gear" label="Settings"></sl-icon>
         </sl-button>
