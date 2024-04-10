@@ -1,5 +1,9 @@
 [
   {
+    "version": "0.3.0",
+    "changes": ["Bætt við valkostinum að \"spóla áfram\" stöku sinnum, frekar en að þurfa að vista tímabil. Þetta er hugsað fyrir tilfelli eins og ferðatíma, sem getur verið mjög mismunandi."]
+  },
+  {
     "version": "0.2.0",
     "changes": ["Bætt við möguleikanum á að \"import\"-a og \"export\"-a gögnum úr appinu. Þetta er aðallega hugsað til að geta fært gögn yfir á annan vafra."]
   }
