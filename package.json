@@ -1,6 +1,6 @@
 {
   "name": "dnd-timer",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "homepage": "https://thoddi.github.io/dnd-timer",
   "private": true,
   "dependencies": {
