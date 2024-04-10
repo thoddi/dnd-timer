@@ -4,6 +4,10 @@ import react from '@vitejs/plugin-react-swc';
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '/',
+  build: {
+    outDir: 'build',    
+    emptyOutDir: true,
+  },
   plugins: [react({ tsDecorators: true })],
   define: {
     APP_VERSION: JSON.stringify(process.env.npm_package_version),
