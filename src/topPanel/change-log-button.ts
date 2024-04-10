@@ -1,6 +1,7 @@
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import changeLog from '../../changeLog.json';
+import { SlDialog } from '@shoelace-style/shoelace';
 
 @customElement('change-log-button')
 export class ChangeLogButton extends LitElement {
