@@ -19,8 +19,8 @@ function DurationItem({ id, name, duration }: Props) {
   const { add: addLog } = useContext(LogContext);
   const { addTime } = useContext(TimeContext);
 
-  const applyDuration = () => {
-    const time = addTime(duration);
+  const applyDuration = async () => {
+    const time = await addTime(duration);
     addLog({ text: name, inGameTime: time, durationId: id });
   };
 

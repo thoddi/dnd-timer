@@ -13,7 +13,7 @@ interface TimeContextType {
    * @param seconds Seconds to add to time.
    * @returns The new time after adding duration.
    */
-  addTime(seconds: number): number;
+  addTime(seconds: number): Promise<number>;
 }
 
 export const TimeContext = createContext<TimeContextType>({} as TimeContextType);
