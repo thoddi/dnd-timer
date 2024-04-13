@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 const key = 'time';
 
-function useInGameTime(): [number, boolean, (speed: number) => void, (duration: number) => number] {
+function useInGameTime(): [number, boolean, (speed: number) => void, (duration: number) => Promise<number>] {
   const [time, setTime] = useState(() => Number(localStorage.getItem(key)));
   const [inGamePlaySpeed, setInGamePlaySpeed] = useState(0);
 
@@ -15,10 +15,14 @@ function useInGameTime(): [number, boolean, (speed: number) => void, (duration: 
    * @param seconds Seconds to add to time.
    * @returns The new time after adding duration.
    */
-  const addTime = (seconds: number): number => {
-    const newTime = time + seconds;
-    setTime(newTime);
-    return newTime;
+  const addTime = async (seconds: number): Promise<number> => {
+    return new Promise((resolve) => {
+      setTime((t) => {
+        const newTime = t + seconds;
+        resolve(newTime);
+        return newTime;
+      });
+    });
   };
 
   useEffect(() => {

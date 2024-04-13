@@ -19,8 +19,8 @@ function CreateOneOffDurationModal({ show, onHide: _onHide }: Props) {
   const { addTime } = useContext(TimeContext);
   const { add: addLog } = useContext(LogContext);
 
-  const onSave = () => {
-    const newTime = addTime(duration);
+  const onSave = async () => {
+    const newTime = await addTime(duration);
     addLog({ text, inGameTime: newTime })
     onHide();
   };

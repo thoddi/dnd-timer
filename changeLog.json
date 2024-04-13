@@ -1,5 +1,9 @@
 [
   {
+    "version": "0.3.1",
+    "changes": ["Lagað villu þar sem tímasetningar gátu farið í rugl eftir að tímabil var keyrt í gegn."]
+  },
+  {
     "version": "0.3.0",
     "changes": ["Bætt við valkostinum að \"spóla áfram\" stöku sinnum, frekar en að þurfa að vista tímabil. Þetta er hugsað fyrir tilfelli eins og ferðatíma, sem getur verið mjög mismunandi."]
   },
