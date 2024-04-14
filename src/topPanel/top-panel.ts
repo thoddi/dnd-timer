@@ -78,12 +78,3 @@ export class TopPanel extends LitElement {
     }
   }
 }
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'top-panel': TopPanelProperties;
-    }
-    interface TopPanelProperties {}
-  }
-}

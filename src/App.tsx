@@ -26,4 +26,13 @@ function App() {
   );
 }
 
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'top-panel': TopPanelProperties;
+    }
+    interface TopPanelProperties {}
+  }
+}
+
 export default App;

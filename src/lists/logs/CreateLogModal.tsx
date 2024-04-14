@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import Modal from "../../utilityComponents/Modal";
 import { LogContext, TimeContext } from "../../contexts/AppContextProvider";
-import FormGroup from "../../utilityComponents/FormGroup";
+import { SlInput } from "../../utilityComponents/SlInput";
 
 interface Props {
   show: boolean;
@@ -26,7 +26,7 @@ function CreateLogModal({ show, onHide: _onHide }: Props) {
 
   return (
     <Modal show={show} title="Skrá nýjan atburð" onHide={onHide} primaryBtnText="Vista" onPrimaryBtnClick={onSave}>
-      <FormGroup label="Heiti atburðar" value={text} onChange={setText} autoFocus></FormGroup>
+      <SlInput label="Heiti atburðar" value={text} onSlInput={(e: any) => setText(e.target.value)} autoFocus></SlInput>
     </Modal>
   )
 }

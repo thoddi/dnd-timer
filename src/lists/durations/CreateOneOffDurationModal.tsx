@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
-import FormGroup from "../../utilityComponents/FormGroup";
 import Modal from "../../utilityComponents/Modal";
 import { LogContext, TimeContext } from "../../contexts/AppContextProvider";
 import Form from "react-bootstrap/esm/Form";
 import InputDuration from "../../utilityComponents/InputDuration";
+import { SlInput } from "../../utilityComponents/SlInput";
 
 const initSeconds = 3600; // 1 klukkutími
 
@@ -34,7 +34,7 @@ function CreateOneOffDurationModal({ show, onHide: _onHide }: Props) {
 
   return (
     <Modal show={show} title="Spóla áfram..." onHide={onHide} primaryBtnText="Keyra" onPrimaryBtnClick={onSave}>
-      <FormGroup label="Texti" value={text} onChange={setText}></FormGroup>
+      <SlInput label="Texti" value={text} onSlInput={(e: any) => setText(e.target.value)}></SlInput>
       <Form.Label>Tímalengd</Form.Label>
       <InputDuration value={duration} onChange={setDuration}></InputDuration>
     </Modal>

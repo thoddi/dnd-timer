@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import Modal from "../../utilityComponents/Modal";
 import { SpeedContext } from "../../contexts/AppContextProvider";
-import FormGroup from "../../utilityComponents/FormGroup";
+import { SlInput } from "../../utilityComponents/SlInput";
 
 interface Props {
   show: boolean;
@@ -23,8 +23,8 @@ function CreateSpeedModal({ show, onHide }: Props) {
 
   return (
     <Modal show={show} title="Vista nýjan tímahraða" onHide={onHide} primaryBtnText="Vista" onPrimaryBtnClick={onSave}>
-      <FormGroup label="Heiti" value={name} onChange={setName}></FormGroup>
-      <FormGroup type="number" label="Hraði" text="Hraði sem margfeldi við raunverulegan tíma." value={speed} onChange={(value?: number) => setSpeed(value ?? 0)}></FormGroup>
+      <SlInput label="Heiti" value={name} onSlInput={(e: any) => setName(e.target.value)}></SlInput>
+      <SlInput type="number" label="Hraði" helpText="Hraði sem margfeldi við raunverulegan tíma." valueAsNumber={speed} onSlInput={(e: any) => setSpeed(e.target.value ?? 0)}></SlInput>
     </Modal>
   )
 }

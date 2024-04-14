@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
 import Modal from "../../utilityComponents/Modal";
-import FormGroup from "../../utilityComponents/FormGroup";
 import { Form } from "react-bootstrap";
 import InputDuration from "../../utilityComponents/InputDuration";
 import { TimerContext } from "../../contexts/AppContextProvider";
+import { SlInput } from "../../utilityComponents/SlInput";
 
 interface Props {
   show: boolean;
@@ -31,7 +31,7 @@ function CreateTimerModal({ show, onHide: _onHide, durationId, eventId, logId }:
 
   return (
     <Modal show={show} title="Vista nýjan teljara" onHide={onHide} primaryBtnText="Vista" onPrimaryBtnClick={onSave}>
-      <FormGroup label="Heiti teljara" value={name} onChange={setName} autoFocus></FormGroup>
+      <SlInput label="Heiti teljara" value={name} onSlInput={(e: any) => setName(e.target.value)}></SlInput>
       <Form.Label>Telja upp í ...</Form.Label>
       <InputDuration value={timerGoal} onChange={setTimerGoal}></InputDuration>
     </Modal>

@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
-import FormGroup from "../../utilityComponents/FormGroup";
 import Modal from "../../utilityComponents/Modal";
 import { EventContext } from "../../contexts/AppContextProvider";
+import { SlInput } from "../../utilityComponents/SlInput";
 
 interface Props {
   show: boolean;
@@ -20,7 +20,7 @@ function CreateEventModal({ show, onHide }: Props) {
 
   return (
     <Modal show={show} title="Vista nýjan atburð" onHide={onHide} primaryBtnText="Vista" onPrimaryBtnClick={onSave}>
-      <FormGroup label="Heiti" value={name} onChange={setName}></FormGroup>
+      <SlInput label="Heiti" value={name} onSlInput={(e: any) => setName(e.target.value)}></SlInput>
     </Modal>
   )
 }
