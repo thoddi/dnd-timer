@@ -2,7 +2,8 @@ import { useContext, useState } from "react";
 import Modal from "../../utilityComponents/Modal";
 import { DurationContext } from "../../contexts/AppContextProvider";
 import Form from "react-bootstrap/esm/Form";
-import InputDuration from "../../utilityComponents/InputDuration";
+// import InputDuration from "../../utilityComponents/InputDuration";
+import { ReactInputDuration } from "../../utilityComponents/input-duration"
 import { SlInput } from "../../utilityComponents/SlInput";
 
 const initSeconds = 3600; // 1 klukkutími
@@ -33,8 +34,9 @@ function CreateDurationModal({ show, onHide: _onHide }: Props) {
   return (
     <Modal show={show} title="Vista nýtt tímabil" onHide={onHide} primaryBtnText="Vista" onPrimaryBtnClick={onSave}>
       <SlInput label="Heiti" value={name} onSlInput={(e: any) => setName(e.target.value)}></SlInput>
-      <Form.Label>Tímalengd</Form.Label>
-      <InputDuration value={duration} onChange={setDuration}></InputDuration>
+      {/* <Form.Label>Tímalengd</Form.Label> */}
+      {/* <InputDuration value={duration} onInput={setDuration}></InputDuration> */}
+      <ReactInputDuration label="Tímalengd"></ReactInputDuration>
     </Modal>
   )
 }
